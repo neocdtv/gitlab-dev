@@ -1,0 +1,26 @@
+# start 
+docker-compose up
+
+# open browser
+127.0.0.1
+
+# get password for gitlab ui; user is root
+docker exec -it gitlab-dev-web-1 cat /etc/gitlab/initial_root_password
+
+# create a project
+
+# create a runner in UI for project
+gitlab->Project->Settings->CI/CD 
+
+# docs
+https://hub.docker.com/r/gitlab/gitlab-ee/
+https://docs.gitlab.com/ee/install/docker.html
+
+# 
+docker exec -it gitlab-dev-runner-1 bash
+gitlab-runner register  --url http://web  --token glrt-6jrDHdPymgeoJVVsRM3k
+type: shell
+
+docker exec -it gitlab-dev-web-1 cat /etc/gitlab/initial_root_password
+
+password: UEcLtapmX7AbM53Bho0s1axtnTeoYoYvbWVV5/vVSho=
