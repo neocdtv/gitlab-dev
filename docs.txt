@@ -19,8 +19,14 @@ https://docs.gitlab.com/ee/install/docker.html
 # 
 docker exec -it gitlab-dev-runner-1 bash
 gitlab-runner register  --url http://web  --token glrt-6jrDHdPymgeoJVVsRM3k
-type: shell
+type: docker
 
 docker exec -it gitlab-dev-web-1 cat /etc/gitlab/initial_root_password
 
 password: UEcLtapmX7AbM53Bho0s1axtnTeoYoYvbWVV5/vVSho=
+
+# runner network config - every time the runner spins up a new docker container, it does not communicate the current docker network to the container, so it has to be added to the runner config at /etc/gitlab-runner/config.toml
+in the section runners.docker add the line network mode, with the name of the docker-compose network, here it is: gitlab-dev_default
+  [runners.docker]
+    ...
+    network_mode = "gitlab-dev_default"

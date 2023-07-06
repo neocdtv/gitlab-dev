@@ -1,13 +1,23 @@
-version: '3.6'
+version: '3.8'
 services:
   web:
+    hostname: web
     image: 'gitlab/gitlab-ee:latest'
     restart: always
     ports:
       - '80:80'
-      - '443:443'
-      - '22:22'
+      - '8443:443'
+      - '8022:22'
     depends_on:
       - runner
   runner:
-    image: 'gitlab/gitlab-runner:latest'
+    hostname: runner
+    build:
+      dockerfile: runner/Dockerfile
+    volumes:
+      - shared:/shared
+      - /var/run/docker.sock:/var/run/docker.sock
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+volumes:
+  shared:
