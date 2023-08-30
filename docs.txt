@@ -21,6 +21,7 @@ docker exec -it gitlab-dev-runner-1 bash
 gitlab-runner register  --url http://web  --token glrt-6jrDHdPymgeoJVVsRM3k
 type: docker
 
+# initial password for the user: root is stored inthe docker container, to extract it do:
 docker exec -it gitlab-dev-web-1 cat /etc/gitlab/initial_root_password
 
 password: UEcLtapmX7AbM53Bho0s1axtnTeoYoYvbWVV5/vVSho=
